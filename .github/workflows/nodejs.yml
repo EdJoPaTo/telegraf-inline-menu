@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    name: Node.js ${{ matrix.node-version }}
+    name: Node.js ${{ matrix.node-version }} ${{ matrix.working-directory }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
