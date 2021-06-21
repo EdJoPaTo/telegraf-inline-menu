@@ -1,5 +1,5 @@
 .nyc_output
-/*-*.*.*.tgz
+*-*.*.*.tgz
 coverage
 dist
 node_modules

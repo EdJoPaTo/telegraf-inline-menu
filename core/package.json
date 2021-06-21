@@ -1,0 +1,54 @@
+{
+	"private": true,
+	"scripts": {
+		"test": "tsc --sourceMap && xo && nyc ava"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^1.0.0",
+		"ava": "^3.6.0",
+		"nyc": "^15.0.0",
+		"typescript": "^4.2.0",
+		"xo": "^0.40.1"
+	},
+	"nyc": {
+		"all": true,
+		"include": [
+			"dist/source",
+			"source"
+		],
+		"reporter": [
+			"lcov",
+			"text"
+		]
+	},
+	"xo": {
+		"semicolon": false,
+		"rules": {
+			"@typescript-eslint/prefer-readonly-parameter-types": "error",
+			"ava/no-ignored-test-files": "off",
+			"camelcase": "off",
+			"import/extensions": "off"
+		},
+		"overrides": [
+			{
+				"files": [
+					"**/*.test.*",
+					"test/**/*.*"
+				],
+				"rules": {
+					"@typescript-eslint/no-non-null-assertion": "off",
+					"@typescript-eslint/no-unsafe-argument": "off",
+					"@typescript-eslint/no-unsafe-assignment": "off",
+					"@typescript-eslint/no-unsafe-return": "off",
+					"@typescript-eslint/prefer-readonly-parameter-types": "off",
+					"unicorn/prefer-node-protocol": "off",
+					"max-params": "off"
+				}
+			}
+		]
+	}
+}
