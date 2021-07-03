@@ -4,7 +4,7 @@ import {Bot} from 'grammy'
 import {MenuTemplate, MenuMiddleware} from '../source'
 
 test('compiles', t => {
-	const bot = new Bot('')
+	const bot = new Bot('123:ABC')
 
 	const menuTemplate = new MenuTemplate('foo bar')
 
