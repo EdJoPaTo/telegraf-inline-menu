@@ -22,7 +22,7 @@ menu.toggle('toggle me', 'toggle me', {
 menu.interact('interaction', 'interact', {
 	hide: () => mainMenuToggle,
 	do: async ctx => {
-		await ctx.answerCallbackQuery({ text: 'you clicked me!'})
+		await ctx.answerCallbackQuery({text: 'you clicked me!'})
 		// Do not update the menu afterwards
 		return false
 	}
@@ -32,7 +32,7 @@ menu.interact('update after action', 'update afterwards', {
 	joinLastRow: true,
 	hide: () => mainMenuToggle,
 	do: async ctx => {
-		await ctx.answerCallbackQuery({ text: 'I will update the menu now…'})
+		await ctx.answerCallbackQuery({text: 'I will update the menu now…'})
 
 		return true
 
@@ -46,7 +46,7 @@ let selectedKey = 'b'
 menu.select('select', ['A', 'B', 'C'], {
 	set: async (ctx, key) => {
 		selectedKey = key
-		await ctx.answerCallbackQuery({ text: `you selected ${key}` })
+		await ctx.answerCallbackQuery({text: `you selected ${key}`})
 		return true
 	},
 	isSet: (_, key) => key === selectedKey
@@ -189,7 +189,7 @@ const mediaMenu = new MenuTemplate<MyContext>(() => {
 })
 mediaMenu.interact('Just a button', 'randomButton', {
 	do: async ctx => {
-		await ctx.answerCallbackQuery({ text: 'Just a callback query answer'})
+		await ctx.answerCallbackQuery({text: 'Just a callback query answer'})
 		return false
 	}
 })
