@@ -1,0 +1,100 @@
+{
+	"name": "grammy-inline-menu",
+	"version": "6.2.1",
+	"description": "Inline Menus for grammY made simple.",
+	"keywords": [
+		"grammY",
+		"Telegram",
+		"keyboard",
+		"button",
+		"menu",
+		"stateless",
+		"middleware"
+	],
+	"license": "MIT",
+	"repository": "EdJoPaTo/telegraf-inline-menu",
+	"bugs": {
+		"url": "https://github.com/EdJoPaTo/telegraf-inline-menu/issues"
+	},
+	"homepage": "https://github.com/EdJoPaTo/telegraf-inline-menu#readme",
+	"author": {
+		"name": "EdJoPaTo",
+		"email": "telegraf-inline-menu-npm-package@edjopato.de",
+		"url": "https://EdJoPaTo.de"
+	},
+	"scripts": {
+		"build": "del-cli dist && tsc",
+		"prepack": "npm run build",
+		"start": "ts-node examples/main-typescript.ts",
+		"test": "tsc --sourceMap && xo && nyc ava"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12"
+	},
+	"peerDependencies": {
+		"grammy": "^1.2.0"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^1.0.0",
+		"ava": "^3.6.0",
+		"del-cli": "^4.0.0",
+		"grammy": "^1.2.0",
+		"nyc": "^15.0.0",
+		"ts-node": "^10.0.0",
+		"typescript": "^4.2.0",
+		"xo": "^0.40.1"
+	},
+	"files": [
+		"dist/source",
+		"!*.test.*"
+	],
+	"main": "dist/source",
+	"types": "dist/source",
+	"nyc": {
+		"all": true,
+		"include": [
+			"dist/source",
+			"source"
+		],
+		"reporter": [
+			"lcov",
+			"text"
+		]
+	},
+	"xo": {
+		"semicolon": false,
+		"rules": {
+			"@typescript-eslint/prefer-readonly-parameter-types": "error",
+			"ava/no-ignored-test-files": "off",
+			"camelcase": "off",
+			"import/extensions": "off"
+		},
+		"overrides": [
+			{
+				"files": [
+					"examples/**/*.js"
+				],
+				"rules": {
+					"unicorn/prefer-module": "off"
+				}
+			},
+			{
+				"files": [
+					"examples/**/*.*",
+					"**/*.test.*",
+					"test/**/*.*"
+				],
+				"rules": {
+					"@typescript-eslint/no-non-null-assertion": "off",
+					"@typescript-eslint/no-unsafe-argument": "off",
+					"@typescript-eslint/no-unsafe-assignment": "off",
+					"@typescript-eslint/no-unsafe-return": "off",
+					"@typescript-eslint/prefer-readonly-parameter-types": "off",
+					"unicorn/prefer-node-protocol": "off",
+					"max-params": "off"
+				}
+			}
+		]
+	}
+}

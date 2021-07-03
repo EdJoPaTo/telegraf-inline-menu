@@ -1,0 +1,13 @@
+{
+	"extends": "@sindresorhus/tsconfig",
+	"include": [
+		"examples",
+		"source",
+		"test"
+	],
+	"compilerOptions": {
+		"module": "CommonJS",
+		"outDir": "dist",
+		"sourceMap": true
+	}
+}
