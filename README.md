@@ -1,4 +1,4 @@
-# Telegraf Inline Menu
+# Telegraf/grammY Inline Menu
 
 This menu library is made to easily create an inline menu for your Telegram bot.
 
@@ -6,30 +6,28 @@ This menu library is made to easily create an inline menu for your Telegram bot.
 
 # Installation
 
-```
-$ npm install telegraf-inline-menu
+```bash
+npm install telegraf-inline-menu
 ```
 
-or using `yarn`:
-
-```
-$ yarn add telegraf-inline-menu
+```bash
+npm install grammY-inline-menu
 ```
 
 Consider using TypeScript with this library as it helps with finding some common mistakes faster.
 
-A good starting point for TypeScript and Telegraf bots might be this repo: [EdJoPaTo/telegram-typescript-bot-template](https://github.com/EdJoPaTo/telegram-typescript-bot-template)
+A good starting point for TypeScript Telegram bots might be this repo: [EdJoPaTo/telegram-typescript-bot-template](https://github.com/EdJoPaTo/telegram-typescript-bot-template)
 
 # Examples
 
 ## Basic Example
 
 ```ts
-const {Telegraf} = require('telegraf')
-const {MenuTemplate, MenuMiddleware} = require('telegraf-inline-menu')
-// or
 import {Telegraf} from 'telegraf'
 import {MenuTemplate, MenuMiddleware} from 'telegraf-inline-menu'
+// or
+import {Bot} from 'grammy'
+import {MenuTemplate, MenuMiddleware} from 'grammy-inline-menu'
 
 const menuTemplate = new MenuTemplate<MyContext>(ctx => `Hey ${ctx.from.first_name}!`)
 
@@ -96,10 +94,10 @@ Telegrams inline keyboards have buttons.
 These buttons have a text and callback data.
 
 When a button is hit, the callback data is sent to the bot.
-You know this from Telegraf from `bot.action`.
+You know this from Telegraf from `bot.action` (or `bot.callbackQuery` for grammY).
 
 This library both creates the buttons and listens for callback data events.
-When a button is pressed and its callback data is occuring the function relevant to the button is executed.
+When a button is pressed and its callback data is occurring the function relevant to the button is executed.
 
 In order to handle tree like menu structures with submenus the buttons itself use a tree like structure to differentiate between the buttons.
 Imagine it as the file structure on a PC.
@@ -112,7 +110,7 @@ This way the library knows what do to when an action occurs:
 If the callback data ends with a `/` it will show the corresponding menu.
 If it does not end with a `/` it is an interaction to be executed.
 
-You can use a Telegraf middleware in order to see which callback data is used when you hit a button:
+You can use a middleware in order to see which callback data is used when you hit a button:
 
 ```ts
 bot.use((ctx, next) => {
@@ -136,7 +134,7 @@ If you want to manually send your submenu `/my-submenu/` you have to supply the 
 ## Improve the docs
 
 If you have any questions on how the library works head out to the issues and ask ahead.
-You can also join the [Telegraf community chat](https://t.me/TelegrafJSChat) in order to talk about the questions on your mind.
+You can also join the [Telegraf chat](https://t.me/TelegrafJSChat) or [grammY chat](https://t.me/grammyjs) in order to talk about the questions on your mind.
 
 When you think there is something to improve on this explanation, feel free to open a Pull Request!
 I am already stuck in my bubble on how this is working.
@@ -160,9 +158,9 @@ const menuTemplate = new MenuTemplate<MyContext>(ctx => {
 
 The menu body can be an object containing `media` and `type` for media.
 The `media` and `type` is the same as [Telegrams InputMedia](https://core.telegram.org/bots/api#inputmedia).
-The media is just passed to telegraf so check its documentation on [how to work with files](https://telegraf.js.org/#/?id=working-with-files).
+The media is just passed over to your bot framework so check their documentation on how to work with files: [Telegraf](https://telegraf.js.org/#/?id=working-with-files) or [grammY](https://grammy.dev/guide/files.html#sending-files).
 
-The [example](examples/main-typescript.ts) features a media submenu with all currently supported media types.
+Each [example](telegraf-inline-menu/examples/main-typescript.ts) features a media submenu with all currently supported media types.
 
 ```ts
 const menuTemplate = new MenuTemplate<MyContext>((ctx, path) => {
@@ -217,7 +215,7 @@ menuTemplate.interact('Text', 'unique', {
 
 ## How to use a dynamic text of a button?
 
-This is often required when translating ([telegraf-i18n](https://github.com/telegraf/telegraf-i18n)) your bot.
+This is often required when translating ([telegraf-i18n](https://github.com/telegraf/telegraf-i18n) or [@grammyjs/i18n](https://github.com/grammyjs/i18n)) your bot.
 
 Also check out other buttons like [toggle](#how-can-i-toggle-a-value-easily) as they do some formatting of the button text for you.
 
@@ -404,12 +402,12 @@ menuTemplate.chooseIntoSubmenu('unique', ['Gotham', 'Mos Eisley', 'Springfield']
 
 ## Can I close the menu?
 
-You can delete the message like you would do with Telegraf: `context.deleteMessage()`.
+You can delete the message like you would do with Telegraf/grammY: `ctx.deleteMessage()`.
 Keep in mind: You can not delete messages which are older than 48 hours.
 
 `deleteMenuFromContext` tries to help you with that:
 It tries to delete the menu.
-If that does not work the keyboard is removed from the message so the user will not accidentally press something.
+If that does not work the keyboard is removed from the message, so the user will not accidentally press something.
 
 ```ts
 menuTemplate.interact('Delete the menu', 'unique', {
